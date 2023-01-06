@@ -13,6 +13,8 @@ const typeDefs = gql`
     description: String
     grade: Number
     stars: Int
+    meters: Int
+    style: String
     crag: Crag
   }
 

@@ -22,6 +22,14 @@ const climbSchema = new Schema({
     max: 5,
     default: 0
   },
+  meters: {
+    type: Number,
+    min: 0,
+    default: 0,
+  },
+  style: {
+    type: String
+  },
   crag: {
     type: Schema.Types.ObjectId,
     ref: 'Crag',

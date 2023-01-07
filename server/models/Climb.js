@@ -31,11 +31,11 @@ const climbSchema = new Schema({
   style: {
     type: String
   },
-  // crag: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'Crag',
-  //   required: true
-  // }
+  crag: {
+    type: Schema.Types.ObjectId,
+    ref: 'Crag',
+    required: true
+  }
   // crag: [Crag.Schema],
 });
 

@@ -3,6 +3,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const daySchema = new Schema({
+  climber: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
   dayDate: {
     type: Date,
     default: Date.now
@@ -12,7 +17,7 @@ const daySchema = new Schema({
     ref: 'Crag',
     required: true
   },
-  climbs: [
+  climb: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Climb'

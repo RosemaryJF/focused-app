@@ -33,7 +33,7 @@ db.once('open', async () => {
       description:
         'One of the popular classics of the grade. Ringbolts and chalk show the way. All good fun.',
       grade: 25,
-      crags: crags[1]._id,
+      crag: crags[1]._id,
       stars: 3,
       meters: 20,
       style: 'Sport',
@@ -43,7 +43,7 @@ db.once('open', async () => {
       description:
         'A very popular route, and one that seems to be a good introduction to the grade - probably due to the plethora of bolts at the crux.',
       grade: 26,
-      crags: crags[4]._id,
+      crag: crags[4]._id,
       stars: 3,
       meters: 25,
       style: 'Sport',
@@ -53,7 +53,7 @@ db.once('open', async () => {
       description:
         'Steep, thin and strenuous. The best thin crack in the mountains, maybe?',
       grade: 23,
-      crags: crags[2]._id,
+      crag: crags[2]._id,
       stars: 3,
       meters: 28,
       style: 'Trad',
@@ -63,7 +63,7 @@ db.once('open', async () => {
       description:
         "Roughly translates as 'something great is coming'. Thin seam crack that gets harder the higher you go. Never fear, there are no jams - it's all face moves and chicken wing gastons",
       grade: 25,
-      crags: crags[3]._id,
+      crag: crags[3]._id,
       stars: 3,
       meters: 2,
       style: 'Sport',
@@ -73,7 +73,7 @@ db.once('open', async () => {
       description:
         'A great mix of crimps and sidepulls with an ever increasing pump to the very end. Hard 25 or easy 26.',
       grade: 25,
-      crags: crags[3]._id,
+      crag: crags[3]._id,
       stars: 3,
       meters: 27,
       style: 'Sport',
@@ -93,7 +93,7 @@ db.once('open', async () => {
       description:
         "Was once one of the hardest routes in the Blue Mountains, and one of Mark's finest hours. Now a popular testpiece.",
       grade: 29,
-      crags: crags[1]._id,
+      crag: crags[1]._id,
       stars: 3,
       meters: 25,
       style: 'Sport',
@@ -103,7 +103,7 @@ db.once('open', async () => {
       description:
         'Absolute classic 25 and for many, their first. Centennial Glen climbing at its best.',
       grade: 25,
-      crags: crags[1]._id,
+      crag: crags[1]._id,
       stars: 3,
       meters: 12,
       style: 'Sport',
@@ -113,7 +113,7 @@ db.once('open', async () => {
       description:
         'The original classic of Hot Flyer Wall.',
       grade: 24,
-      crags: crags[4]._id,
+      crag: crags[4]._id,
       stars: 3,
       meters: 28,
       style: 'Sport',
@@ -123,7 +123,7 @@ db.once('open', async () => {
       description:
         '10 pitch sport route.',
       grade: 22,
-      crags: crags[5]._id,
+      crag: crags[5]._id,
       stars: 3,
       meters: 330,
       style: 'Sport Multi'
@@ -133,7 +133,7 @@ db.once('open', async () => {
       description:
         'Very exposed route up a clean overhung wall - with zero vegetation or choss. Lots of bolts and air.',
       grade: 25,
-      crags: crags[5]._id,
+      crag: crags[5]._id,
       stars: 2,
       meters: 130,
       style: 'Sport Multi'
@@ -142,31 +142,83 @@ db.once('open', async () => {
 
   console.log('climbs seeded');
 
+  await Day.deleteMany();
+
+  const days = await Day.insertMany([
+    {
+      climber: users[0]._id,
+      dayDate: 130123,
+      crag: crags[0]._id,
+      climb: climbs[0]._id,
+      focus: 'Redpoint',
+      attempts: 2,
+      rests: 2,
+      beta: 'Heel hook side flake 4th-5th draw',
+      notes: null,
+    },
+    {
+      climber: users[0]._id,
+      dayDate: 140123,
+      crag: crags[5]._id,
+      climb: climbs[11]._id,
+      focus: 'Send',
+      attempts: 1,
+      rests: 0,
+      beta: null,
+      notes: 'Enjoyed the rests, took in the view',
+    },
+    {
+      climber: users[1]._id,
+      dayDate: 010123,
+      crag: crags[1]._id,
+      climb: climbs[7]._id,
+      focus: 'Beta puzzle',
+      attempts: 4,
+      rests: 6,
+      beta: 'Go for the dyno, rest is not as good as you think',
+      notes: 'Extended draw 7th bolt',
+    },
+    {
+      climber: users[1]._id,
+      dayDate: 030123,
+      crag: crags[5]._id,
+      climb: climbs[10]._id,
+      focus: 'Send',
+      attempts: 1,
+      rests: 0,
+      beta: 'Move fast on the first move',
+      notes: 'skin raw by 4th pitch, should have had more rest days',
+    },
+  ]);
+
+  console.log('days seeded');
+
   await User.deleteMany();
 
-  await User.create({
-    firstName: 'Hazel',
-    lastName: 'Findlay',
-    email: 'hazel.findlay@testmail.com',
-    password: 'password12345',
-    days: [
-      {
-        climbs: [climbs[3]._id, climbs[4]._id, climbs[2]._id, climbs[11]._id]
-      }
-    ]
-  });
-
-  await User.create({
-    firstName: 'Wolfgang',
-    lastName: 'Gullich',
-    email: 'wolfgang.g@testmail.com',
-    password: 'password12345',
-    days: [
-      {
-        climbs: [climbs[8]._id, climbs[7]._id, climbs[10]._id]
-      }
-    ]
-  });
+  const users = await User.createMany([
+    {
+      firstName: 'Hazel',
+      lastName: 'Findlay',
+      email: 'hazel.findlay@testmail.com',
+      password: 'password12345',
+      days: [
+        {
+          days: [days[0]._id, days[1]._id]
+        }
+      ]
+    },
+    {
+      firstName: 'Wolfgang',
+      lastName: 'Gullich',
+      email: 'wolfgang.g@testmail.com',
+      password: 'password12345',
+      days: [
+        {
+          days: [days[2]._id, days[3]._id]
+        }
+      ]
+    }
+  ]);
 
   console.log('users seeded');
 

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
+const Crag = require('./Crag');
 
 const climbSchema = new Schema({
   name: {
@@ -30,11 +31,12 @@ const climbSchema = new Schema({
   style: {
     type: String
   },
-  crag: {
-    type: Schema.Types.ObjectId,
-    ref: 'Crag',
-    required: true
-  }
+  // crag: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Crag',
+  //   required: true
+  // }
+  // crag: [Crag.Schema],
 });
 
 const Climb = mongoose.model('Climb', climbSchema);

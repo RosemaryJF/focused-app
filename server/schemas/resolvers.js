@@ -23,9 +23,9 @@ const resolvers = {
 
       return await Climb.find(params).populate('crag');
     },
-    crag: async (parent, { _id }) => {
-      return await Crag.findById(_id);
-    },
+    // crag: async (parent, { _id }) => {
+    //   return await Crag.findById(_id).populate('climb');
+    // },
     climb: async (parent, { _id }) => {
       return await Climb.findById(_id).populate('crag');
     },

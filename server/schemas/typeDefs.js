@@ -11,7 +11,7 @@ const typeDefs = gql`
     _id: ID
     name: String
     description: String
-    grade: Number
+    grade: Int
     stars: Int
     meters: Int
     style: String
@@ -20,7 +20,7 @@ const typeDefs = gql`
 
   type Day {
     _id: ID
-    dayDate: Date
+    dayDate: Day
     crag: Crag
     climbs: [Climb]
     focus: String
@@ -49,7 +49,7 @@ const typeDefs = gql`
 
   type Query {
     crags(climb: ID, name: String): [Crag]
-    # crag(_id: ID!): Crag
+    crag(_id: ID!): Crag
     climbs(crag: ID, name: String): [Climb]
     climb(_id: ID!): Climb
     user: User

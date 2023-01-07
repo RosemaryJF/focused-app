@@ -142,11 +142,31 @@ db.once('open', async () => {
 
   console.log('climbs seeded');
 
+  await User.deleteMany();
+
+  await User.create({
+    firstName: 'Hazel',
+    lastName: 'Findlay',
+    email: 'hazel.findlay@testmail.com',
+    password: 'password12345',
+    days: []
+  });
+
+  await User.create({
+    firstName: 'Wolfgang',
+    lastName: 'Gullich',
+    email: 'wolfgang.g@testmail.com',
+    password: 'password12345',
+    days: []
+  });
+
+  console.log('users seeded');
+
   await Day.deleteMany();
 
   const days = await Day.insertMany([
     {
-      climber: users[0]._id,
+      climber: 'Hazel',
       dayDate: 130123,
       crag: crags[0]._id,
       climb: climbs[0]._id,
@@ -157,7 +177,7 @@ db.once('open', async () => {
       notes: null,
     },
     {
-      climber: users[0]._id,
+      climber: 'Hazel',
       dayDate: 140123,
       crag: crags[5]._id,
       climb: climbs[11]._id,
@@ -168,7 +188,7 @@ db.once('open', async () => {
       notes: 'Enjoyed the rests, took in the view',
     },
     {
-      climber: users[1]._id,
+      climber: 'Wolfgang',
       dayDate: 010123,
       crag: crags[1]._id,
       climb: climbs[7]._id,
@@ -179,7 +199,7 @@ db.once('open', async () => {
       notes: 'Extended draw 7th bolt',
     },
     {
-      climber: users[1]._id,
+      climber: 'Wolfgang',
       dayDate: 030123,
       crag: crags[5]._id,
       climb: climbs[10]._id,
@@ -192,35 +212,6 @@ db.once('open', async () => {
   ]);
 
   console.log('days seeded');
-
-  await User.deleteMany();
-
-  const users = await User.createMany([
-    {
-      firstName: 'Hazel',
-      lastName: 'Findlay',
-      email: 'hazel.findlay@testmail.com',
-      password: 'password12345',
-      days: [
-        {
-          days: [days[0]._id, days[1]._id]
-        }
-      ]
-    },
-    {
-      firstName: 'Wolfgang',
-      lastName: 'Gullich',
-      email: 'wolfgang.g@testmail.com',
-      password: 'password12345',
-      days: [
-        {
-          days: [days[2]._id, days[3]._id]
-        }
-      ]
-    }
-  ]);
-
-  console.log('users seeded');
 
   process.exit();
 });

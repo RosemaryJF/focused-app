@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const daySchema = new Schema({
   climber: {
-    type: Schema.Types.ObjectId,
+    type: Schema.Types.String,
     ref: 'User',
     required: true
   },
@@ -35,7 +35,7 @@ const daySchema = new Schema({
   rests: {
     type: Number,
     required: true,
-    min: 1
+    min: 0
   },
   beta: {
     type: String

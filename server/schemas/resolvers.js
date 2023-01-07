@@ -6,37 +6,28 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     crags: async () => {
-      return await Crag.find();
+      return await Crag.find({}).populate('climbs').populate({
+        path: 'climbs',
+        populate: 'name'
+      });
     },
-    climbs: async (parent, { crag, name }) => {
-      const params = {};
-
-      if (crag) {
-        params.crag = crag;
-      }
-
-      if (name) {
-        params.name = {
-          $regex: name
-        };
-      }
-
-      return await Climb.find(params).populate('crag');
+    climbs: async () => {
+      return await Climb.find({}).populate('crag');
     },
-    // crag: async (parent, { _id }) => {
-    //   return await Crag.findById(_id).populate('climb');
-    // },
+    crag: async (parent, { _id }) => {
+      return await Crag.findById(_id).populate('climb');
+    },
     climb: async (parent, { _id }) => {
       return await Climb.findById(_id).populate('crag');
     },
     user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
-          path: 'days.climbs',
-          populate: 'crag'
+          path: 'days',
+          populate: 'day'
         });
 
-        user.days.sort((a, b) => b.dayDate - a.dayDate);
+        // user.days.sort((a, b) => b.dayDate - a.dayDate);
 
         return user;
       }
@@ -46,8 +37,8 @@ const resolvers = {
     day: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
-          path: 'days.climbs',
-          populate: 'crag'
+          path: 'user',
+          populate: 'name'
         });
 
         return user.days.id(_id);

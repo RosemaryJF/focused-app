@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const daySchema = new Schema({
-  climber: {
+  user: {
     type: Schema.Types.String,
     ref: 'User',
     required: true
@@ -20,7 +20,8 @@ const daySchema = new Schema({
   climb: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Climb'
+      ref: 'Climb',
+      required: true
     }
   ],
   focus: {

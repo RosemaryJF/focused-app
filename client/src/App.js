@@ -8,6 +8,8 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
+import { ThemeProvider } from './utils/GlobalState';
+
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -17,7 +19,7 @@ import Signup from './pages/Signup';
 // import Days from './pages/Days';
 // import Profile from './pages/Profile';
 // import Nav from './components/Nav';
-// import { ThemeProvider } from './utils/GlobalState';
+
 // import Success from './pages/Success';
 
 const httpLink = createHttpLink({
@@ -45,7 +47,7 @@ function App() {
       <Router>
         <div>
           <ThemeProvider>
-            <Nav />
+            {/* <Nav /> */}
             <Routes>
               <Route
                 path="/"
@@ -59,7 +61,7 @@ function App() {
                 path="/signup"
                 element={<Signup />}
               />
-              <Route
+              {/* <Route
                 path="/success"
                 element={<Success />}
               />
@@ -78,7 +80,7 @@ function App() {
               <Route
                 path="*"
                 element={<NoMatch />}
-              />
+              /> */}
             </Routes>
           </ThemeProvider>
         </div>

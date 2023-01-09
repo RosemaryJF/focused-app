@@ -25,7 +25,11 @@ const userSchema = new Schema({
     required: true,
     minlength: 5
   },
-  days: [Day.schema]
+  days: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Day',
+    required: true
+  }]
 });
 
 // set up pre-save middleware to create password

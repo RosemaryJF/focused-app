@@ -31,12 +31,12 @@ const climbSchema = new Schema({
   style: {
     type: String
   },
-  // crag: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'Crag',
-  //   required: true
-  // }
-  crag: [Crag.Schema],
+  crag: {
+    type: Schema.Types.ObjectId,
+    ref: 'Crag',
+    required: true
+  }
+  // crag: [Crag.Schema],
 });
 
 const Climb = mongoose.model('Climb', climbSchema);

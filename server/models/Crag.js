@@ -9,7 +9,11 @@ const cragSchema = new Schema({
     required: true,
     trim: true
   },
-  climbs: [Climb.schema]
+  climbs: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Climb',
+    required: true
+  }]
 });
 
 const Crag = mongoose.model('Crag', cragSchema);

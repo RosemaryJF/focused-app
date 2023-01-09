@@ -20,6 +20,7 @@ const typeDefs = gql`
 
   type Day {
     _id: ID
+    climber: User
     dayDate: Day
     crag: Crag
     climbs: [Climb]
@@ -48,12 +49,12 @@ const typeDefs = gql`
   }
 
   type Query {
-    crags(climb: ID, name: String): [Crag]
+    crags: [Crag]
     crag(_id: ID!): Crag
-    climbs(crag: ID, name: String): [Climb]
+    climbs: [Climb]
     climb(_id: ID!): Climb
     user: User
-    days(_id: ID!): Day
+    days: [Day]
     day(_id: ID!): Day
     # checkout(products: [ID]!): Checkout
   }
@@ -64,6 +65,7 @@ const typeDefs = gql`
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     updateDay(_id: ID!, climbs: [ID]!, focus: [ID]!, attempts: [ID]!, rests: [ID]!, beta: [ID]!, notes:[ID]!): Day
     login(email: String!, password: String!): Auth
+    deleteDay(_id: ID!): Day
   }
 `;
 

@@ -9,11 +9,11 @@ import {
 import { setContext } from '@apollo/client/link/context';
 
 import Home from './pages/Home';
-import Detail from './pages/Detail';
-import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 // TO WRITE
+// import Detail from './pages/Detail';
+// import NoMatch from './pages/NoMatch';
 // import Days from './pages/Days';
 // import Profile from './pages/Profile';
 // import Nav from './components/Nav';

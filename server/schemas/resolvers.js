@@ -14,17 +14,26 @@ const resolvers = {
     climbs: async () => {
       return await Climb.find({}).populate('crag');
     },
+    days: async () => {
+      return await Day.find({}).populate('climbs')
+    },
     crag: async (parent, { _id }) => {
-      return await Crag.findById(_id).populate('climb');
+      return await Crag.findById(_id).populate('climbs').populate({
+        path: 'climbs',
+        populate: 'name'
+      });
     },
     climb: async (parent, { _id }) => {
       return await Climb.findById(_id).populate('crag');
+    },
+    day: async (parent, { _id }) => {
+      return await Day.findById(_id).populate('climb')
     },
     user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
           path: 'days',
-          populate: 'day'
+          populate: 'climb'
         });
 
         // user.days.sort((a, b) => b.dayDate - a.dayDate);
@@ -35,9 +44,9 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
     day: async (parent, { _id }, context) => {
-      if (context.user) {
+      if (context.climber) {
         const user = await User.findById(context.user._id).populate({
-          path: 'user',
+          path: 'climber',
           populate: 'name'
         });
 
@@ -132,7 +141,12 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    }
+    },
+
+    deleteDay: async (parent, { _id }) => {
+      return await Day.deleteOne({ _id });
+    },
+
   }
 };
 

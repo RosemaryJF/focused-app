@@ -20,7 +20,7 @@ const typeDefs = gql`
 
   type Day {
     _id: ID
-    climber: User
+    user: User
     dayDate: Day
     crag: Crag
     climbs: [Climb]
@@ -49,21 +49,32 @@ const typeDefs = gql`
   }
 
   type Query {
-    crags: [Crag]
-    crag(_id: ID!): Crag
-    climbs: [Climb]
-    climb(_id: ID!): Climb
+    crags(climb: ID, name:String): [Crag]
+    crag(_id: ID!, climb: ID, name: String): Crag
+    climbs(crag: ID, name: String): [Climb]
+    climb(_id: ID!, crag: ID, name: String): Climb
     user: User
-    days: [Day]
+    days(climb: ID, name: String): [Day]
     day(_id: ID!): Day
     # checkout(products: [ID]!): Checkout
   }
 
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    addDay(climbs: [ID]!): Day
+    addDay(
+      _id: ID!, 
+      user: String!,
+      dayDate: Int,
+      crag: String!,
+      climbs: String!,
+      focus: String,
+      attempts: Int,
+      rests: Int,
+      beta: String,
+      notes: String,
+    ): Day
     updateUser(firstName: String, lastName: String, email: String, password: String): User
-    updateDay(_id: ID!, climbs: [ID]!, focus: [ID]!, attempts: [ID]!, rests: [ID]!, beta: [ID]!, notes:[ID]!): Day
+    updateDay(_id: ID!, climbs: String, focus: String, attempts: Int, rests: Int, beta: String, notes:String): Day
     login(email: String!, password: String!): Auth
     deleteDay(_id: ID!): Day
   }

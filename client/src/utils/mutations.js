@@ -13,9 +13,9 @@ export const LOGIN = gql`
 
 export const ADD_DAY = gql`
   mutation addDay(
-    $user: [ID]!
+    $user: ID!
     $dayDate: Day
-    $climb: [ID]!
+    $climb: ID!
     $focus: String!
     $attempts: Number!
     $rests: Number

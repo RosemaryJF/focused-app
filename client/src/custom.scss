@@ -1,0 +1,15 @@
+// Custom color styling for light & dark mode
+$theme-colors: (
+  "custom-color-900-lght": #C58940,
+  "custom-color-800-lght": #E5BA73,
+  "custom-color-700-lght": #FAEAB1,
+  "custom-color-600-lght": #FAF8F1,
+  "custom-color-900-drk": #C58940,
+  "custom-color-800-drk": #603601,
+  "custom-color-700-drk": #595959,
+  "custom-color-600-drk": #FAF8F1,
+
+);
+
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import '~bootstrap/scss/bootstrap.scss';

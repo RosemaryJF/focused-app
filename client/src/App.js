@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
@@ -8,17 +8,18 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-import { ThemeProvider } from './utils/GlobalState';
+// import { ThemeContext, ThemeProvider } from './utils/GlobalState';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Nav from './components/Nav';
 // TO WRITE
 // import Detail from './pages/Detail';
 // import NoMatch from './pages/NoMatch';
 // import Days from './pages/Days';
 // import Profile from './pages/Profile';
-// import Nav from './components/Nav';
+
 
 // import Success from './pages/Success';
 
@@ -46,22 +47,23 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          <ThemeProvider>
-            {/* <Nav /> */}
-            <Routes>
-              <Route
-                path="/"
-                element={<Home />}
-              />
-              <Route
-                path="/login"
-                element={<Login />}
-              />
-              <Route
-                path="/signup"
-                element={<Signup />}
-              />
-              {/* <Route
+          {/* <ThemeProvider>
+            <ThemeContext> */}
+          <Nav />
+          <Routes>
+            <Route
+              path="/"
+              element={<Home />} HOME
+            />
+            <Route
+              path="/login"
+              element={<Login />}
+            />
+            <Route
+              path="/signup"
+              element={<Signup />}
+            />
+            {/* <Route
                 path="/success"
                 element={<Success />}
               />
@@ -81,8 +83,10 @@ function App() {
                 path="*"
                 element={<NoMatch />}
               /> */}
-            </Routes>
-          </ThemeProvider>
+          </Routes>
+          <Home />
+          {/* </ThemeContext>
+          </ThemeProvider> */}
         </div>
       </Router>
     </ApolloProvider>

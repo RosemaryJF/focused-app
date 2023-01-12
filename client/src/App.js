@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
@@ -9,6 +9,10 @@ import {
 import { setContext } from '@apollo/client/link/context';
 
 // import { ThemeContext, ThemeProvider } from './utils/GlobalState';
+import ThemeProvider from 'react-bootstrap/ThemeProvider'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -45,25 +49,28 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <div>
-          {/* <ThemeProvider>
-            <ThemeContext> */}
-          <Nav />
-          <Routes>
-            <Route
-              path="/"
-              element={<Home />} HOME
-            />
-            <Route
-              path="/login"
-              element={<Login />}
-            />
-            <Route
-              path="/signup"
-              element={<Signup />}
-            />
-            {/* <Route
+      <ThemeProvider
+        breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
+        minBreakpoint="xxs"
+      >
+        <Router>
+          <Container fluid>
+            <Row>
+              <Nav />
+              <Routes>
+                <Route
+                  path="/"
+                  element={<Home />}
+                />
+                <Route
+                  path="/login"
+                  element={<Login />}
+                />
+                <Route
+                  path="/signup"
+                  element={<Signup />}
+                />
+                {/* <Route
                 path="/success"
                 element={<Success />}
               />
@@ -83,15 +90,23 @@ function App() {
                 path="*"
                 element={<NoMatch />}
               /> */}
-          </Routes>
-          <Home />
-          {/* </ThemeContext>
-          </ThemeProvider> */}
-        </div>
-      </Router>
+
+              </Routes>
+            </Row>
+          </Container>
+        </Router>
+      </ThemeProvider>
     </ApolloProvider>
   );
 }
+
+// function App() {
+//   return (
+//     <div>
+//       <Home />
+//     </div>
+//   );
+// }
 
 export default App;
 

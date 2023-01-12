@@ -23,18 +23,10 @@ export const ADD_DAY = gql`
     $notes: String!
   ) {
     addDay(
-      user{
-        _id
-        name
-      }
-      dayDate
-      climb {
-        _id
-        name
-        crag {
-          name
-        }
-      }
+      user: $user
+      # dayDate
+      climb: $climb
+      crag: $crag
       focus: $focus
       attempts: $attempts
       rests: $rests

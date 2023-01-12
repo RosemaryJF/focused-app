@@ -14,9 +14,7 @@
     "author": "RosemaryJF",
     "license": "gpl-3.0",
     "devDependencies": {
-        "concurrently": "^5.1.0"
-    },
-    "dependencies": {
-        "styled-components": "^5.3.6"
+        "concurrently": "^5.1.0",
+        "react-error-overlay": "^6.0.9"
     }
 }

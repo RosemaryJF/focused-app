@@ -16,8 +16,8 @@ function Login(props) {
             });
             const token = mutationResponse.data.login.token;
             Auth.login(token);
-        } catch (e) {
-            console.log(e);
+        } catch (event) {
+            console.log(event);
         }
     };
 
@@ -31,7 +31,7 @@ function Login(props) {
 
     return (
         <div className="container my-1">
-            <Link to="/signup">← Go to Signup</Link>
+            <Link to="/signup">Signup Here</Link>
 
             <h2>Login</h2>
             <form onSubmit={handleFormSubmit}>

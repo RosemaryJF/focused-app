@@ -21,7 +21,8 @@
       "stripe": "^8.67.0"
     },
     "devDependencies": {
-      "nodemon": "^2.0.2"
+      "nodemon": "^2.0.2",
+      "react-error-overlay": "6.0.9"
     }
   }
   

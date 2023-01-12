@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div className="container">
       <h1 id="welcome">Ready to get focused?</h1>
-      <SiteEntry />
+      {/* <SiteEntry /> */}
     </div>
   );
 };

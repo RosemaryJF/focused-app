@@ -12,10 +12,10 @@ const resolvers = {
       });
     },
     climbs: async () => {
-      return await Climb.find({}).populate('crag');
+      return await Climb.find({}).populate('crag')
     },
     days: async () => {
-      return await Day.find({}).populate('climbs')
+      return await Day.find({}).populate('climb')
     },
     crag: async (parent, { _id }) => {
       return await Crag.findById(_id).populate('climbs').populate({
@@ -33,7 +33,7 @@ const resolvers = {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
           path: 'days',
-          populate: 'climb'
+          populate: 'day'
         });
 
         // user.days.sort((a, b) => b.dayDate - a.dayDate);
@@ -46,7 +46,7 @@ const resolvers = {
     day: async (parent, { _id }, context) => {
       if (context.climber) {
         const user = await User.findById(context.user._id).populate({
-          path: 'climber',
+          path: 'user',
           populate: 'name'
         });
 

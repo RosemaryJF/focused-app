@@ -8,24 +8,16 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-// import { ThemeContext, ThemeProvider } from './utils/GlobalState';
-import ThemeProvider from 'react-bootstrap/ThemeProvider'
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Nav from './components/Nav';
-// TO WRITE
+import Profile from './pages/Profile';
+// import Nav from './components/Nav';
 // import Detail from './pages/Detail';
 // import NoMatch from './pages/NoMatch';
-// import Days from './pages/Days';
-// import Profile from './pages/Profile';
-
-
+// import { StoreProvider } from './utils/GlobalState';
 // import Success from './pages/Success';
+// import OrderHistory from './pages/OrderHistory';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -49,64 +41,45 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <ThemeProvider
-        breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
-        minBreakpoint="xxs"
-      >
-        <Router>
-          <Container fluid>
-            <Row>
-              <Nav />
-              <Routes>
-                <Route
-                  path="/"
-                  element={<Home />}
-                />
-                <Route
-                  path="/login"
-                  element={<Login />}
-                />
-                <Route
-                  path="/signup"
-                  element={<Signup />}
-                />
-                {/* <Route
-                path="/success"
-                element={<Success />}
+      <Router>
+        <div>
+          <Routes>
+            <Route
+              path="/"
+              element={<Home />}
+            />
+            <Route
+              path="/login"
+              element={<Login />}
+            />
+            <Route
+              path="/signup"
+              element={<Signup />}
+            />
+            <Route
+              path="/success"
+              element={<Profile />}
+            />
+            {/* <Route
+                path="/orderHistory"
+                element={<OrderHistory />}
               />
               <Route
-                path="/profile"
-                element={<Profile />}
-              />
-              <Route
-                path="/days"
-                element={<Days />}
-              />
-              <Route
-                path="/days/:id"
+                path="/products/:id"
                 element={<Detail />}
               />
               <Route
                 path="*"
                 element={<NoMatch />}
               /> */}
-
-              </Routes>
-            </Row>
-          </Container>
-        </Router>
-      </ThemeProvider>
-    </ApolloProvider>
+          </Routes>
+        </div>
+      </Router>
+    </ApolloProvider >
   );
 }
 
-// function App() {
-//   return (
-//     <div>
-//       <Home />
-//     </div>
-//   );
-// }
-
 export default App;
+
+
 

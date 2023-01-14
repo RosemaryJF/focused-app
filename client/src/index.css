@@ -17,6 +17,7 @@
   html,
   body {
     min-height: 100%;
+    background-color: var(--primary);
   }
   
   body {
@@ -35,7 +36,7 @@
   h4,
   h5,
   h6 {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Karla', sans-serif;
     font-weight: 500;
     margin: 5px 0;
     line-height: 1.25;
@@ -47,6 +48,7 @@
   
   h2 {
     font-size: 2rem;
+    margin-top: 5px;
   }
   
   h3 {
@@ -117,11 +119,13 @@
     cursor: default;
   }
   
-  form {
-    width: 40%;
+  #loginForm,
+  #signupForm {
+    margin-top: 5%;
+    background-color: #FAEAB1;
   }
   
-  input {
+  InputGroup {
     font-size: 1rem;
     padding: 0.25rem;
     border: 1px solid var(--dark);
@@ -140,6 +144,7 @@
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    background-color: var(--tertiary);
   }
   
   .flex-row {
@@ -207,6 +212,12 @@
   @media screen and (max-width: 768px) {
     .card {
       width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 390px) {
+    Card {
+      background-color: var(--tertiary);
     }
   }
   

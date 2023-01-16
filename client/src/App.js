@@ -12,18 +12,13 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
-// import Nav from './components/Nav';
-// import Detail from './pages/Detail';
-// import NoMatch from './pages/NoMatch';
-// import { StoreProvider } from './utils/GlobalState';
-// import Success from './pages/Success';
-// import OrderHistory from './pages/OrderHistory';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
+  console.log(localStorage.getItem('id_token'));
   const token = localStorage.getItem('id_token');
   return {
     headers: {
@@ -57,21 +52,10 @@ function App() {
               element={<Signup />}
             />
             <Route
-              path="/success"
+              path="/profile"
               element={<Profile />}
             />
-            {/* <Route
-                path="/orderHistory"
-                element={<OrderHistory />}
-              />
-              <Route
-                path="/products/:id"
-                element={<Detail />}
-              />
-              <Route
-                path="*"
-                element={<NoMatch />}
-              /> */}
+
           </Routes>
         </div>
       </Router>
@@ -83,3 +67,9 @@ export default App;
 
 
 
+// import Nav from './components/Nav';
+// import Detail from './pages/Detail';
+// import NoMatch from './pages/NoMatch';
+// import { StoreProvider } from './utils/GlobalState';
+// import Success from './pages/Success';
+// import OrderHistory from './pages/OrderHistory';

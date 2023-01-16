@@ -25,7 +25,7 @@ function Signup(props) {
         lastName: formState.lastName,
       },
     });
-    const token = mutationResponse.data.addUser.token;
+    const token = await mutationResponse.data.addUser.token;
     Auth.login(token);
   };
 

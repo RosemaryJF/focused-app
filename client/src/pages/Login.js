@@ -17,11 +17,12 @@ function Login(props) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    console.log(formState);
     try {
       const mutationResponse = await login({
         variables: { email: formState.email, password: formState.password },
       });
-      const token = mutationResponse.data.login.token;
+      const token = await mutationResponse.data.login.token;
       Auth.login(token);
     } catch (event) {
       console.log(event);
@@ -61,6 +62,7 @@ function Login(props) {
           <Col sm={10}>
             <Form.Control
               type="password"
+              name="password"
               placeholder="********"
               onChange={handleChange} />
           </Col>

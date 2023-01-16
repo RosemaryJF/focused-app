@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 // Sets token secret and expiration date
 const secret = 'mysecretsshhhhh';
-const expiration = '2h';
+const expiration = '7200';
 
 module.exports = {
   // Function for the authenticated routes
@@ -10,10 +10,19 @@ module.exports = {
     // Allows token to be sent via req.body, req.query, or headers
     let token = req.body.token || req.query.token || req.headers.authorization;
 
-    // ["Bearer", "<tokenvalue>"]
     if (req.headers.authorization) {
-      token = token.split(' ').pop().trim();
+      console.log(req.headers.authorization)
+      console.log(token)
+      const regex = /^Token\s+(.*)$/;
+      const match = req.headers.authorization.match(regex);
+      if (match) {
+        token = match[1];
+      }
     }
+    // ["Bearer", "<tokenvalue>"]
+    // if (req.headers.authorization) {
+    //   token = token.split(' ').pop().trim();
+    // }
 
     if (!token) {
       return req;
@@ -23,7 +32,7 @@ module.exports = {
     try {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
-    } catch {
+    } catch (err) {
       console.log('Invalid token');
       return res.status(400).json({ message: 'invalid token!' });
     }

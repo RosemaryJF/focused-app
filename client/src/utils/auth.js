@@ -8,13 +8,18 @@ class AuthService {
   loggedIn() {
     // Checks if there is a saved token and it's still valid
     const token = this.getToken();
+    ;
     return !!token && !this.isTokenExpired(token);
   }
 
   isTokenExpired(token) {
     try {
+      const token = localStorage.getItem('id_token');
       const decoded = decode(token);
-      if (decoded.exp < Date.now() / 1000) {
+      const currentTime = new Date().getTime() / 1000;
+      // if (decoded.exp < Date.now() / 1000) {
+      if (decoded.exp < currentTime) {
+        console.log('token expired')
         return true;
       } else return false;
     } catch (err) {
@@ -25,13 +30,14 @@ class AuthService {
   getToken() {
     // Retrieves the user token from localStorage
     return localStorage.getItem('id_token');
+
   }
 
   login(idToken) {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
 
-    window.location.assign('/');
+    window.location.assign('/profile');
   }
 
   logout() {

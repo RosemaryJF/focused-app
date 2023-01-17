@@ -1,5 +1,5 @@
-import React from 'react';
-import { Modal, Button } from "react-bootstrap";
+// import React from 'react';
+// import { Modal, Button } from "react-bootstrap";
 
 // import Button from 'react-bootstrap/Button';
 // // import Col from 'react-bootstrap/Col';
@@ -7,111 +7,184 @@ import { Modal, Button } from "react-bootstrap";
 // import Option from 'react-bootstrap/Form';
 // import Row from 'react-bootstrap/Row';
 
-// export default function DayFormModal(props) {
-//   function climbDropdowns(climbs, crags) {
-//     const mappedClimbs = climbs.map(climb => {
-//       const selected = crags.find(crag => crag === climb._id) ? true : false;
-//       return <option value={climb._id} selected={selected}>{climb.name}</option>;
-//     });
-//     return mappedClimbs;
-//   }
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { ADD_DAY } from '../../utils/mutations';
+import { QUERY_DAYS } from '../../utils/queries';
 
-//   return (
+const DayForm = () => {
+  const [formState, setFormState] = useState({
+    id: null,
+    dayDate: '',
+    crag: '',
+    climb: '',
+    focus: '',
+    attempts: '',
+    rests: '',
+    beta: '',
+    notes: '',
+  });
+  const [addDay, { error }] = useMutation(ADD_DAY, {
+    update(cache, { data: { addDay } }) {
+      const { days } = cache.readQuery({ query: QUERY_DAYS });
 
-//     <Modal show={props.show} id="day">
-//       <Modal.Dialog>
-//         <Modal.Header closeButton onClick={props.close}>
-//           <Modal.Title>
-//             Create a New Day
-//           </Modal.Title>
-//         </Modal.Header>
-//         <Modal.Body>
-//           <form {...props} autocomplete="off">
-//             <div className="form-group">
-//               <label htmlFor="title">Day</label>
-//               <input
-//                 type="date"
-//                 className="form-control"
-//                 id="date"
-//                 placeholder="Focus Date"
-//                 value={props.dayDate}
-//                 name="dayDate"
-//                 onChange={props.handleInputChange}
-//               />
-//             </div>
+      cache.writeQuery({
+        query: QUERY_DAYS,
+        data: { days: [addDay, ...days] }
+      });
+    }
+  });
 
-//             <div class="form-group">
-//               <label for="exampleFormControlSelect2">Guests</label>
-//               <select multiple class="form-control" id="exampleFormControlSelect2" onChange={props.handleGuestsChange}>
-//                 {climbDropdowns(props.climbs, props.crags)}
-//               </select>
-//             </div>
+  // update state based on for input changes
+  const handleChange = (event) => {
+    const { name, value } = event.target;
 
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
 
-//             <div className="form-group">
-//               <label htmlFor="location">Location</label>
-//               <input
-//                 type="text"
-//                 className="form-control"
-//                 id="location"
-//                 placeholder="Location"
-//                 value={props.location}
-//                 name="location"
-//                 onChange={props.handleInputChange}
-//               />
-//               <p className="error">{props.errorLocation}</p>
-//             </div>
+  const handleFormSubmit = async event => {
+    event.preventDefault();
 
-//             <div className="form-group">
-//               <label htmlFor="startDate">Start Date</label>
-//               <input
-//                 type="date"
-//                 className="form-control"
-//                 id="start"
-//                 value={props.start}
-//                 name="start"
-//                 onChange={props.handleInputChange}
-//               />
-//               <p className="error">{props.errorStart}</p>
-//             </div>
-//             <div className="form-group">
-//               <label htmlFor="endDate">End Date</label>
-//               <input
-//                 type="date"
-//                 className="form-control"
-//                 id="end"
-//                 value={props.end}
-//                 name="end"
-//                 onChange={props.handleInputChange}
-//               />
-//               <p className="error">{props.errorEnd}</p>
-//             </div>
-//             <div className="form-group">
-//               <label htmlFor="description">Description</label>
-//               <textarea
-//                 className="form-control"
-//                 id="description"
-//                 rows="4"
-//                 value={props.description}
-//                 name="description"
-//                 onChange={props.handleInputChange}
-//               ></textarea>
-//               <p className="error">{props.errorDescription}</p>
-//             </div>
-//           </form>
-//         </Modal.Body>
-//         <Modal.Footer>
-//           <Button onClick={props.close} variant="secondary">
-//             Close
-//           </Button>
-//           <Button onClick={props.save} variant="primary" class="newEvent">
-//             Save Trip
-//           </Button>
-//         </Modal.Footer>
-//       </Modal.Dialog>
-//     </Modal>
-//   );
-// }
+    try {
+      const { data } = await addDay({
+        variables: { ...formState }
+      });
+      setFormState({
+        id: null,
+        dayDate: '',
+        crag: '',
+        climb: '',
+        focus: '',
+        attempts: '',
+        rests: '',
+        beta: '',
+        notes: '',
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  return (
+    <div className="py-3">
+      <h3>Enter the information for your day:</h3>
+      <form onSubmit={handleFormSubmit}>
+        <div class="form-floating mb-3">
+          <input
+            className="form-control"
+            placeholder="Choose a date"
+            name='dayDate'
+            type='date'
+            id='dayDate'
+            value={formState.dayDate}
+            onChange={handleChange}
+          />
+          <label for="dayDate">Choose a date to climb!</label>
+        </div>
+        <div className="form-floating mb-3">
+          <textarea
+            className="form-control"
+            placeholder="Choose which crag you'll be going to"
+            name="crag"
+            id="crag"
+            value={formState.crag}
+            onChange={handleChange}
+          >
+          </textarea>
+          <label for="crag">Choose which crag you'll be going to</label>
+        </div>
+        <div className="form-floating mb-3">
+          <textarea
+            className="form-control"
+            placeholder="Pick what climb you're doing"
+            name="climb"
+            id="climb"
+            value={formState.climb}
+            onChange={handleChange}
+          >
+          </textarea>
+          <label for="climb">Pick what climb you're doing</label>
+        </div>
+        <div className="mb-3">
+          <select
+            className="form-select"
+            aria-label=".form-select-1"
+            name="focus"
+            id="focus"
+            onChange={handleChange}>
+            <option selected>Choose you focus:</option>
+            <option value="Onsight">Onsight</option>
+            <option value="Beta Puzzle">Beta Puzzle</option>
+            <option value="Flash">Flash</option>
+            <option value="Top Rope">Top Rope</option>
+            <option value="Red Point">Red Point</option>
+            <option value="Pink Point">Pink Point</option>
+            <option value="Winging It">Winging It</option>
+          </select>
+        </div>
+        <div className="form-floating mb-3">
+          <textarea
+            className="form-control"
+            placeholder="How many attempts would you like to do"
+            name="attempts"
+            id="attempts"
+            type="number"
+            value={formState.attempts}
+            onChange={handleChange}
+          >
+          </textarea>
+          <label for="caseDescription">How many attempts would you like to do?</label>
+        </div>
+        <div className="form-floating mb-3">
+          <textarea
+            className="form-control"
+            placeholder="How many rests would you like to take"
+            name="rests"
+            id="rests"
+            type="number"
+            value={formState.rests}
+            onChange={handleChange}
+          >
+          </textarea>
+          <label for="caseDescription">How many rests would you like to take?</label>
+        </div>
+        <div className="form-floating mb-3">
+          <textarea
+            className="form-control"
+            placeholder="Any beta you want to remember for next time?"
+            name="beta"
+            id="beta"
+            value={formState.beta}
+            onChange={handleChange}
+          >
+          </textarea>
+          <label for="beta">Any beta you want to remember for next time?</label>
+        </div>
+        <div className="form-floating mb-3">
+          <textarea
+            className="form-control"
+            placeholder="Any other notes you want to take?"
+            name="notes"
+            id="notes"
+            value={formState.notes}
+            onChange={handleChange}
+          >
+          </textarea>
+          <label for="caseDescription">Any other notes you want to take?</label>
+        </div>
+        <div className="d-grid ga-2 d-md-flex justify-content-md-end py-2">
+          <button className='btn btn-dark btn-primary px-4' type='submit'>
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default DayForm;
 
 // function DayForm(props) {
 //   const [crag, setCrag] = useState('');
@@ -331,4 +404,4 @@ import { Modal, Button } from "react-bootstrap";
 //   );
 // }
 
-// export default DayForm;
+

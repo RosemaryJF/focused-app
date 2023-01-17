@@ -1,13 +1,29 @@
-// import React, { useState } from 'react';
-// import DayForm from '../DayForm';
-// import { Link } from "react-router-dom";
-// import { ADD_DAY, UPDATE_DAY } from "../../utils/actions";
+import React, { useState } from 'react';
+import DayForm from '../DayForm';
+import { Link } from "react-router-dom";
+import { ADD_DAY, UPDATE_DAY } from "../../utils/actions";
 
+function Days(props) {
+  return (
+    <ul className="list-group">
+      {/* Here we map over each grocery item and return a new array of `li` elements that contains the grocery name */}
+      {/* When using map you must provide a unique key attribute to each item. Ours is `item.id` */}
+      {props.days.map(day => (
+        <li className="day-group-item" key={day._id}>
+          {day.climb}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export default Days;
 
 
 // function Day(props) {
 //   const [edit, setEdit] = useState({
 //     id: null,
+//     dayDate: '',
 //     crag: '',
 //     climb: '',
 //     focus: '',
@@ -23,6 +39,7 @@
 //     props.editDayItem(edit.id, value);
 //     setEdit({
 //       id: null,
+//       dayDate: '',
 //       crag: '',
 //       climb: '',
 //       focus: '',

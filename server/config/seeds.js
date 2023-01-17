@@ -150,7 +150,7 @@ db.once('open', async () => {
       dayDate: 130123,
       crag: crags[0]._id,
       climb: climbs[0]._id,
-      focus: 'Redpoint',
+      focus: 'Red Point',
       attempts: 2,
       rests: 2,
       beta: 'Heel hook side flake 4th-5th draw',

@@ -12,45 +12,28 @@ import DayList from '../components/DayList';
 import Nav from '../components/Nav';
 
 const Profile = () => {
-  const [authenticated, setauthenticated] = useState(null);
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("authenticated");
-    if (loggedInUser) {
-      setauthenticated(loggedInUser);
-    }
-  }, []);
-
   if (!Auth.loggedIn) {
     <Navigate replace to="/"></Navigate>
   } else {
     return (
-      <div>
-        <p>Welcome to your Profile</p>
-      </div>
-    );
+      <Container fluid id="profile" className="m-0 p-0">
+        <Nav />
+        <Container className="px-5" style={{ marginTop: "50px", paddingTop: "50px", paddingBottom: "100px" }} >
+          <Row className="text-justify">
+            <Col className="col-md-6 p-4 text-profile">
+              <p>Welcome back!</p>
+              <p>
+                <li>Click the '+' icon to add a day.</li>
+                <li>Or view the days you've already created.</li>
+              </p>
+              <DayList />
+            </Col>
+          </Row>
+        </Container>
+      </Container>
+    )
   }
 }
-//   if (!Auth.loggedIn)
-//     return (
-//       <Navigate to="/"></Navigate>
-//     );
-//   else return (
-//     <Container fluid id="profile" className="m-0 p-0">
-//       <Nav />
-//       <Container className="px-5" style={{ marginTop: "50px", paddingTop: "50px", paddingBottom: "100px" }} >
-//         <Row className="text-justify">
-//           <Col className="col-md-6 p-4 text-profile">
-//             <p>Welcome back!</p>
-//             <p>
-//               <li>Click the '+' icon to add a day.</li>
-//               <li>Or view the days you've already created.</li>
-//             </p>
-//             <DayList />
-//           </Col>
-//         </Row>
-//       </Container>
-//     </Container>
-//   )
 
 
 // return (

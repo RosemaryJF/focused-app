@@ -1,17 +1,26 @@
-import React, { createContext, useContext } from 'react';
-// import { useThemeReducer } from './reducers';
+import React, { createContext, useContext } from "react";
+import { useDayReducer } from './reducers'
 
-// Create the theme context using React.CreateContext()
-export const ThemeContext = createContext();
+const FocusContext = createContext();
+const { Provider } = FocusContext;
 
-// Create a custom hook that allows easy access to the ThemeContext values
-export const useTheme = () => useContext(ThemeContext);
+const FocusProvider = ({ value = [], ...props }) => {
+  const [state, dispatch] = useDayReducer({
+    dayDate: '',
+    crag: '',
+    climb: '',
+    focus: '',
+    attempts: '',
+    rests: '',
+    beta: '',
+    notes: '',
+  });
 
-// Creating our theme provider. Accepts an argument of "props"
-export default function ThemeProvider(props) {
-    const darkTheme = false;
+  return <Provider value={[state, dispatch]} {...props} />;
+};
 
-    return <ThemeContext.Provider value={{ darkTheme }} {...props} />;
-}
+const useFocusContext = () => {
+  return useContext(FocusContext);
+};
 
-export { ThemeProvider }
+export { FocusProvider, useFocusContext };

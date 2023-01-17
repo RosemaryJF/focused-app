@@ -4,6 +4,7 @@ import {
   UPDATE_DAY,
   CLEAR_DAY,
   DELETE_DAY,
+  ADD_DAY,
   // TOGGLE_THEME
 } from './actions';
 
@@ -19,10 +20,16 @@ export const reducer = (state, action) => {
         day: [...state.day, action.climb],
       };
 
+    case ADD_DAY:
+      return {
+        ...state,
+        days: [...state.days, action.payload]
+      };
+
     case UPDATE_DAY:
       return {
         ...state,
-        climb: [...action.climb],
+        day: [...action.day],
       };
 
     case CLEAR_DAY:
@@ -34,9 +41,10 @@ export const reducer = (state, action) => {
 
     case DELETE_DAY:
       return {
-        days: [
-          ...state.days.filter(day => day._id !== action.payload)
-        ]
+        ...state,
+        days: [...state.days].filter(
+          (day) => day._id !== action.payload
+        )
       };
 
 

@@ -52,6 +52,26 @@ export const QUERY_CRAGS = gql`
   }
 `;
 
+export const QUERY_DAYS = gql`
+  {
+    days {
+      _id
+      dayDate
+      climb {
+        name
+        crag {
+          name
+        }
+      }
+      focus
+      attempts
+      rests
+      beta
+      notes
+    }
+  }
+`;
+
 export const QUERY_USER = gql`
   {
     user {

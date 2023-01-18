@@ -146,6 +146,10 @@
     margin-right: auto;
     background-color: var(--tertiary);
   }
+
+  .container-fluid {
+    background-color: var(--primary);
+  }
   
   .flex-row {
     display: flex;

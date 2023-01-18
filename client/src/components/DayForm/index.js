@@ -1,16 +1,15 @@
-// import React from 'react';
-// import { Modal, Button } from "react-bootstrap";
-
-// import Button from 'react-bootstrap/Button';
-// // import Col from 'react-bootstrap/Col';
-// import Form from 'react-bootstrap/Form';
-// import Option from 'react-bootstrap/Form';
-// import Row from 'react-bootstrap/Row';
-
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_DAY } from '../../utils/mutations';
 import { QUERY_DAYS } from '../../utils/queries';
+
+// import Button from 'react-bootstrap/Button';
+// import Col from 'react-bootstrap/Col';
+// import Form from 'react-bootstrap/Form';
+// import Option from 'react-bootstrap/Form';
+// import Row from 'react-bootstrap/Row';
+
+
 
 const DayForm = () => {
   const [formState, setFormState] = useState({
@@ -69,9 +68,10 @@ const DayForm = () => {
   }
   return (
     <div className="py-3">
-      <h3>Enter the information for your day:</h3>
-      <form onSubmit={handleFormSubmit}>
-        <div class="form-floating mb-3">
+      <h1>What's your focus going to be?</h1>
+      <h3>Enter the information for your day below</h3>
+      <form className='rounded' onSubmit={handleFormSubmit}>
+        <div className="form-floating mb-3">
           <input
             className="form-control"
             placeholder="Choose a date"
@@ -81,7 +81,7 @@ const DayForm = () => {
             value={formState.dayDate}
             onChange={handleChange}
           />
-          <label for="dayDate">Choose a date to climb!</label>
+          <label htmlFor="dayDate">Choose a date to climb!</label>
         </div>
         <div className="form-floating mb-3">
           <textarea
@@ -93,7 +93,7 @@ const DayForm = () => {
             onChange={handleChange}
           >
           </textarea>
-          <label for="crag">Choose which crag you'll be going to</label>
+          <label htmlFor="crag">Choose which crag you'll be going to</label>
         </div>
         <div className="form-floating mb-3">
           <textarea
@@ -105,7 +105,7 @@ const DayForm = () => {
             onChange={handleChange}
           >
           </textarea>
-          <label for="climb">Pick what climb you're doing</label>
+          <label htmlFor="climb">Pick what climb you're doing</label>
         </div>
         <div className="mb-3">
           <select
@@ -114,7 +114,7 @@ const DayForm = () => {
             name="focus"
             id="focus"
             onChange={handleChange}>
-            <option selected>Choose you focus:</option>
+            <option defaultValue={[0]}>Choose your focus:</option>
             <option value="Onsight">Onsight</option>
             <option value="Beta Puzzle">Beta Puzzle</option>
             <option value="Flash">Flash</option>
@@ -135,7 +135,7 @@ const DayForm = () => {
             onChange={handleChange}
           >
           </textarea>
-          <label for="caseDescription">How many attempts would you like to do?</label>
+          <label htmlFor="caseDescription">How many attempts would you like to do?</label>
         </div>
         <div className="form-floating mb-3">
           <textarea
@@ -148,7 +148,7 @@ const DayForm = () => {
             onChange={handleChange}
           >
           </textarea>
-          <label for="caseDescription">How many rests would you like to take?</label>
+          <label htmlFor="caseDescription">How many rests would you like to take?</label>
         </div>
         <div className="form-floating mb-3">
           <textarea
@@ -160,7 +160,7 @@ const DayForm = () => {
             onChange={handleChange}
           >
           </textarea>
-          <label for="beta">Any beta you want to remember for next time?</label>
+          <label htmlFor="beta">Any beta you want to remember for next time?</label>
         </div>
         <div className="form-floating mb-3">
           <textarea
@@ -172,7 +172,7 @@ const DayForm = () => {
             onChange={handleChange}
           >
           </textarea>
-          <label for="caseDescription">Any other notes you want to take?</label>
+          <label htmlFor="caseDescription">Any other notes you want to take?</label>
         </div>
         <div className="d-grid ga-2 d-md-flex justify-content-md-end py-2">
           <button className='btn btn-dark btn-primary px-4' type='submit'>

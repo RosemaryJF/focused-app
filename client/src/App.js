@@ -12,6 +12,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
+import AddDay from './pages/AddDay';
+import Days from './pages/Days';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -55,7 +57,14 @@ function App() {
               path="/profile"
               element={<Profile />}
             />
-
+            <Route
+              path="/newday"
+              element={<AddDay />}
+            />
+            <Route
+              path="/days"
+              element={<Days />}
+            />
           </Routes>
         </div>
       </Router>

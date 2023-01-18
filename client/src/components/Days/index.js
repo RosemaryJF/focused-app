@@ -1,79 +1,35 @@
-import React, { useState } from 'react';
-import DayForm from '../DayForm';
-import { Link } from "react-router-dom";
-import { ADD_DAY, UPDATE_DAY } from "../../utils/actions";
+import React from 'react';
+// Import the `useQuery()` hook from Apollo Client
+import { useQuery } from '@apollo/client';
+// Import the query we are going to execute from its file
+import { QUERY_DAYS } from '../../utils/queries'
+import DayList from '../DayList';
 
-function Days(props) {
+const Days = () => {
+  // Execute the query on component load
+  const { loading, data } = useQuery(QUERY_DAYS);
+
+  // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
+  const days = data?.days || [];
+
   return (
-    <ul className="list-group">
-      {/* Here we map over each grocery item and return a new array of `li` elements that contains the grocery name */}
-      {/* When using map you must provide a unique key attribute to each item. Ours is `item.id` */}
-      {props.days.map(day => (
-        <li className="day-group-item" key={day._id}>
-          {day.climb}
-        </li>
-      ))}
-    </ul>
+    <main>
+      <div className="flex-row justify-center">
+        <div className="col-12 col-md-8 mb-3">
+          {/* If the data is still loading, render a loading message */}
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <DayList
+              days={days}
+              title="Your stored focus days are:"
+            />
+          )}
+        </div>
+      </div>
+    </main>
   );
-}
+};
 
 export default Days;
-
-
-// function Day(props) {
-//   const [edit, setEdit] = useState({
-//     id: null,
-//     dayDate: '',
-//     crag: '',
-//     climb: '',
-//     focus: '',
-//     attempts: '',
-//     rests: '',
-//     beta: '',
-//     notes: '',
-//   });
-
-//   console.log(props.day);
-
-//   const submitUpdate = (value) => {
-//     props.editDayItem(edit.id, value);
-//     setEdit({
-//       id: null,
-//       dayDate: '',
-//       crag: '',
-//       climb: '',
-//       focus: '',
-//       attempts: '',
-//       rests: '',
-//       beta: '',
-//       notes: '',
-//     });
-//   };
-
-//   if (edit.id) {
-//     return <DayForm edit={edit} onSubmit={submitUpdate} />;
-//   }
-
-//   return props.day.map((day, i) => (
-//     <div
-//       className={
-//         day.isComplete
-//           ? `day-row complete ${day.focus}`
-//           : `day-row ${day.fpcus}`
-//       }
-//       key={i}
-//     >
-//       <div key={day.id} onClick={() => props.completeDay(day.id)}>
-//         {day.text}
-//       </div>
-//       <div className="icons">
-//         {console.log(day)}
-//         <p onClick={() => setEdit({ id: day.id, climb: day.climb.name, focus: day.focus })}> ✏️</p>
-//         <p onClick={() => props.deleteDay(day.id)}> 🗑️</p>
-//       </div>
-//     </div>
-//   ));
-// }
-
-// export default Day;
 

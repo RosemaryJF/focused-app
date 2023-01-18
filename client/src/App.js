@@ -20,7 +20,6 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  console.log(localStorage.getItem('id_token'));
   const token = localStorage.getItem('id_token');
   return {
     headers: {
@@ -73,12 +72,3 @@ function App() {
 }
 
 export default App;
-
-
-
-// import Nav from './components/Nav';
-// import Detail from './pages/Detail';
-// import NoMatch from './pages/NoMatch';
-// import { StoreProvider } from './utils/GlobalState';
-// import Success from './pages/Success';
-// import OrderHistory from './pages/OrderHistory';

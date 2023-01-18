@@ -17,15 +17,6 @@ export const QUERY_CLIMBS = gql`
   }
 `;
 
-// CHECKOUT / STRIPE
-// export const QUERY_CHECKOUT = gql`
-//   query getCheckout($products: [ID]!) {
-//     checkout(products: $products) {
-//       session
-//     }
-//   }
-// `;
-
 export const QUERY_ALL_CLIMBS = gql`
   {
     climbs {
@@ -44,7 +35,7 @@ export const QUERY_ALL_CLIMBS = gql`
 `;
 
 export const QUERY_CRAGS = gql`
-  {
+  query getCrags {
     crags {
       _id
       name
@@ -53,16 +44,19 @@ export const QUERY_CRAGS = gql`
 `;
 
 export const QUERY_DAYS = gql`
-  {
+  query getDays {
     days {
       _id
       dayDate
+      user {
+        firstName
+      }
       climb {
         name
-        crag {
+      }
+      crag {
           name
         }
-      }
       focus
       attempts
       rests

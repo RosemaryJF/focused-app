@@ -15,7 +15,7 @@ const resolvers = {
       return await Climb.find({}).populate('crag')
     },
     days: async () => {
-      return await Day.find({}).populate('climb')
+      return await Day.find().sort({ dayDate: -1 });
     },
     crag: async (parent, { _id }) => {
       return await Crag.findById(_id).populate('climbs').populate({

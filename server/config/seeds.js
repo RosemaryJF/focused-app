@@ -142,7 +142,7 @@ db.once('open', async () => {
 
   console.log('climbs seeded');
 
-  await Day.deleteMany();
+  await Day.deleteMany({});
 
   const days = await Day.insertMany([
     {

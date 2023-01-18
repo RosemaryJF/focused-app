@@ -3,7 +3,12 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { QUERY_DAYS } from '../../utils/queries';
 
-const DayList = ({ days }) => {
+const DayList = ({
+  days,
+  daydate,
+  showClimb = true,
+  showFirstName = true,
+}) => {
   // if (!days.length) {
   //   return (
   //     <div>
@@ -18,12 +23,12 @@ const DayList = ({ days }) => {
       {days &&
         days.map((day) => (
           <div key={day._id} className="card mb-3">
-            <h4 className="card-header bg-primary text-light p-2 m-0">
+            {/* <h4 className="card-header bg-primary text-light p-2 m-0">
               {day.dayDate}
-            </h4>
+            </h4> */}
             <div className="card-body bg-light p-2">
-              <p>{day.climb}</p>
-              <p>{day.crag}</p>
+              <p>{day.climbs}</p>
+              <p>{day.crags}</p>
               <p>{day.focus}</p>
               <p>{day.attempts}</p>
               <p>{day.rests}</p>

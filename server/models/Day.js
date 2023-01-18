@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
 
 const { Schema } = mongoose;
 
@@ -10,7 +11,8 @@ const daySchema = new Schema({
   },
   dayDate: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    get: (timestamp) => dateFormat(timestamp),
   },
   crag: {
     type: Schema.Types.ObjectId,

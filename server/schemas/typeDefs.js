@@ -21,7 +21,7 @@ const typeDefs = gql`
   type Day {
     _id: ID
     user: User
-    dayDate: Day
+    dayDate: Day 
     crag: Crag
     climbs: [Climb]
     focus: String

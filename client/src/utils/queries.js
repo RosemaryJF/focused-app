@@ -47,16 +47,17 @@ export const QUERY_DAYS = gql`
   query getDays {
     days {
       _id
-      dayDate
+      # dayDate 
       user {
         firstName
       }
-      climb {
-        name
+      climbs {
+        _id
       }
       crag {
-          name
-        }
+        _id
+      }
+      
       focus
       attempts
       rests

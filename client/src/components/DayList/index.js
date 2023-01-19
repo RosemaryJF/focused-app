@@ -37,6 +37,8 @@ const DayList = ({
             </Row>
             <Row className="text-center">
               <Col>Beta: {day.beta}</Col>
+            </Row>
+            <Row>
               <Col>Notes: {day.notes}</Col>
             </Row>
           </Container>

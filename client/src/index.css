@@ -120,7 +120,8 @@
   }
   
   #loginForm,
-  #signupForm {
+  #signupForm,
+  .profile {
     margin-top: 5%;
     background-color: #FAEAB1;
   }

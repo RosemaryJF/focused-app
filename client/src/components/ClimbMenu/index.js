@@ -1,57 +1,35 @@
-import React, { useEffect, useContext } from 'react';
-import { useQuery } from '@apollo/client';
-import { QUERY_ALL_CLIMBS, QUERY_CLIMBS } from '../../utils/queries';
-import { idbPromise } from '../../utils/helpers';
+import React from "react";
+import { Link } from "react-router-dom";
 
-function ClimbMenu() {
-
-  const [state, dispatch] = useContext();
-
-  const { climbs } = state;
-
-  const { loading, data: climbData } = useQuery(QUERY_ALL_CLIMBS);
-
-  useEffect(() => {
-    if (climbData) {
-      dispatch({
-        type: QUERY_CLIMBS,
-        climbs: climbData.climbs,
-      });
-      climbData.climbs.forEach((climb) => {
-        idbPromise('climbs', 'put', climb);
-      });
-    } else if (!loading) {
-      idbPromise('climbs', 'get').then((climbs) => {
-        dispatch({
-          type: QUERY_CLIMBS,
-          climbs: climbs,
-        });
-      });
-    }
-  }, [climbData, loading, dispatch]);
-
-  const handleClick = (id) => {
-    dispatch({
-      type: QUERY_ALL_CLIMBS,
-      currentClimb: id,
-    });
-  };
-
+const ClimbMenu = ({ climbs }) => {
+  // if (!climbs.length) {
+  //   return <h3>No Climbs Yet</h3>;
+  // }
   return (
     <div>
-      <h2>Browser climbs here:</h2>
-      {climbs.map((item) => (
-        <button
-          key={item._id}
-          onClick={() => {
-            handleClick(item._id);
-          }}
-        >
-          {item.name}
-        </button>
-      ))}
+      <div>
+        <h2>Climbs</h2>
+      </div>
+      <div>
+        {climbs &&
+          climbs.map((climb) => (
+            <div key={climb._id} className="">
+              <h3><Link to={`/climbs/${climb._id}`}>
+                {climb.name}
+              </Link></h3>
+              <div className=" bg-transparent" bg="custom-color-800-lght">
+                <p>{climb.description}</p>
+                <p>{climb.grade}</p>
+                <p>{climb.stars}</p>
+                <p>{climb.meters}</p>
+                <p>{climb.style}</p>
+                <p>{climb.crag.name}</p>
+              </div>
+            </div>
+          ))}
+      </div>
     </div>
   );
-}
+};
 
 export default ClimbMenu;

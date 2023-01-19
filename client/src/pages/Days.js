@@ -6,6 +6,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import Nav from '../components/Nav';
 import Days from '../components/Days';
 
+// Shows all days
 const AllDaysDisplay = () => {
   if (!Auth.loggedIn) {
     <Navigate replace to="/"></Navigate>

@@ -8,6 +8,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import navbarLogo from '../../assets/images/navbar.png';
 
 function showNavigation() {
+  // If user is logged in will render add day, days and log out options
   if (Auth.loggedIn()) {
     return (
       <Navbar bg="custom-color-900-lght" sticky="top" expand="sm">
@@ -32,6 +33,7 @@ function showNavigation() {
       </Navbar>
     );
   } else {
+    // If user is NOT logged in will render sign up and login options
     return (
       <Navbar className="navbar-transparent" sticky="top" expand="lg">
         <Navbar.Brand href="/">FOCUSED</Navbar.Brand>
@@ -47,19 +49,5 @@ function showNavigation() {
     );
   }
 };
-// return (
-//   <header className="flex-row px-1">
-//     <h1 >
-//       <Link to="/">
-//         FOCUSED
-//       </Link>
-//     </h1>
-
-//     <nav>
-//       {showNavigation()}
-//     </nav>
-//   </header>
-// );
-
 
 export default showNavigation;

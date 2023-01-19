@@ -15,16 +15,17 @@ export const ADD_DAY = gql`
   mutation addDay(
     $user: ID!
     $dayDate: Day
-    $climb: ID!
+    $climb: climb
+    $crag: crag
     $focus: String!
-    $attempts: Number!
+    $attempts: Number
     $rests: Number
-    $beta: String!
-    $notes: String!
+    $beta: String
+    $notes: String
   ) {
     addDay(
       user: $user
-      # dayDate
+      dayDate: $dayDate
       climb: $climb
       crag: $crag
       focus: $focus

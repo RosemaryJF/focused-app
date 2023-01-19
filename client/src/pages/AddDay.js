@@ -6,6 +6,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import DayForm from '../components/DayForm';
 import Nav from '../components/Nav';
 
+// Base add day page, where the form to add a day renders
 const AddDay = () => {
   if (!Auth.loggedIn) {
     <Navigate replace to="/"></Navigate>

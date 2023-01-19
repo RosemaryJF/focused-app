@@ -20,12 +20,15 @@ app.use(express.json());
 // Serves up static assets
 app.use('/images', express.static(path.join(__dirname, '../client/assets/images')));
 
+// Serves up the public folder with the index.html
 app.use(express.static(__dirname + '/public'))
 
+// serves up the build folder when in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
+// serves up the index.html when needed
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { LOGIN } from '../utils/mutations';
 import Auth from '../utils/auth';
 
@@ -15,6 +15,7 @@ function Login(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN);
 
+  // Handles the login form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
@@ -29,6 +30,7 @@ function Login(props) {
     }
   };
 
+  // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -38,12 +40,13 @@ function Login(props) {
 
   };
 
+  // Login form
   return (
     <div className="justify-content-evenly text-center" id="loginForm">
       <img src={logo} alt="Focused Logo" style={{ width: '200px', height: '200px', marginBottom: '10px' }} />
       <h2>Login</h2>
       <Form className="container-sm" onSubmit={handleFormSubmit}>
-        <Form.Group as={Row} className="mb-3" controlId="formLoginEmail">
+        <Form.Group as={Row} className="mb-3" id="formLoginEmail">
           <Form.Label column sm={2}>Email address:</Form.Label>
           <Col sm={10}>
             <Form.Control
@@ -58,7 +61,7 @@ function Login(props) {
           </Form.Text>
         </Form.Group>
 
-        <Form.Group as={Row} className="mb-3" controlId="formLoginPassword">
+        <Form.Group as={Row} className="mb-3" id="formLoginPassword">
           <Form.Label column sm={2}>Password:</Form.Label>
           <Col sm={10}>
             <Form.Control

@@ -24,9 +24,6 @@ const DayList = ({
       {days &&
         days.map((day) => (
           <div key={day._id} className="">
-            {/* <h4 className="card-header bg-primary text-light p-2 m-0">
-              {day.dayDate}
-            </h4> */}
             <div className=" bg-transparent" bg="custom-color-800-lght">
               <p>{day.dayDate}</p>
               <p>{day.climbs}</p>

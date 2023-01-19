@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import logo from '../assets/images/icon.png';
 
+// Homepage
 const Home = () => {
   return (
     <Card

@@ -39,7 +39,7 @@ function ClimbMenu() {
 
   return (
     <div>
-      <h2>Choose a Climb:</h2>
+      <h2>Browser climbs here:</h2>
       {climbs.map((item) => (
         <button
           key={item._id}

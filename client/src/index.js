@@ -12,7 +12,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// This enables the app to run offline and load faster. It can be changed to
+// register() enables the app to run offline and load faster. It can be changed to
 // unregister() below. Note; register() comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.register();

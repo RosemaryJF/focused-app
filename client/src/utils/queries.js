@@ -57,7 +57,6 @@ export const QUERY_DAYS = gql`
       crag {
         _id
       }
-      
       focus
       attempts
       rests

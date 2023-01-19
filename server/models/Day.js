@@ -32,12 +32,10 @@ const daySchema = new Schema({
   },
   attempts: {
     type: Number,
-    required: true,
     min: 1
   },
   rests: {
     type: Number,
-    required: true,
     min: 0
   },
   beta: {

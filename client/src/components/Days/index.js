@@ -1,7 +1,7 @@
 import React from 'react';
-// Import the `useQuery()` hook from Apollo Client
+// Imports the `useQuery()` hook from Apollo Client
 import { useQuery } from '@apollo/client';
-// Import the query we are going to execute from its file
+// Imports the query being executed from its file
 import { QUERY_DAYS } from '../../utils/queries'
 import DayList from '../DayList';
 
@@ -9,7 +9,7 @@ const Days = () => {
   // Execute the query on component load
   const { loading, data } = useQuery(QUERY_DAYS);
 
-  // Use optional chaining to check if data exists and if it has a thoughts property. If not, return an empty array to use.
+  // Use optional chaining to check if data exists and if it has a days property. If not, return an empty array to use.
   const days = data?.days || [];
 
   return (

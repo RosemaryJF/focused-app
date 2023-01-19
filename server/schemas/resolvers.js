@@ -1,48 +1,59 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Climb, Crag, Day } = require('../models');
 const { signToken } = require('../utils/auth');
-// const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
+  // Queries
   Query: {
+    // All crags 
     crags: async () => {
       return await Crag.find({}).populate('climbs').populate({
         path: 'climbs',
         populate: 'name'
       });
     },
+
+    // All Climbs
     climbs: async () => {
       return await Climb.find({}).populate('crag')
     },
+
+    // All Days
     days: async () => {
       return await Day.find().sort({ dayDate: -1 });
     },
+
+    // One crag
     crag: async (parent, { _id }) => {
-      return await Crag.findById(_id).populate('climbs').populate({
-        path: 'climbs',
-        populate: 'name'
-      });
+      return await Crag.findById(_id).populate('climbs')
+      //   .populate({
+      //   path: 'climbs',
+      //   populate: 'name'
+      // });
     },
+
+    // One Climb
     climb: async (parent, { _id }) => {
       return await Climb.findById(_id).populate('crag');
     },
+
+    // One day
     day: async (parent, { _id }) => {
       return await Day.findById(_id).populate('climb')
     },
+
+    // One user
     user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
           path: 'days',
           populate: 'day'
         });
-
-        // user.days.sort((a, b) => b.dayDate - a.dayDate);
-
         return user;
       }
-
       throw new AuthenticationError('Not logged in');
     },
+
     day: async (parent, { _id }, context) => {
       if (context.climber) {
         const user = await User.findById(context.user._id).populate({
@@ -55,51 +66,20 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    // STRIPE
-    // checkout: async (parent, args, context) => {
-    //   const url = new URL(context.headers.referer).origin;
-    //   const day = new Day({ climbs: args.climbs });
-    //   const line_items = [];
-
-    //   const { climbs } = await day.populate('climbs');
-
-    //   for (let i = 0; i < climbs.length; i++) {
-    //     const climb = await stripe.climbs.create({
-    //       name: climbs[i].name,
-    //       description: climbs[i].description,
-    //       images: [`${url}/images/${climbs[i].image}`]
-    //     });
-
-    //     const price = await stripe.prices.create({
-    //       climb: climb.id,
-    //       unit_amount: climbs[i].price * 100,
-    //       currency: 'aud',
-    //     });
-
-    //     line_items.push({
-    //       price: price.id,
-    //       quantity: 1
-    //     });
-    //   }
-
-    //   const session = await stripe.checkout.sessions.create({
-    //     payment_method_types: ['card'],
-    //     line_items,
-    //     mode: 'payment',
-    //     success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-    //     cancel_url: `${url}/`
-    //   });
-
-    //   return { session: session.id };
-    // }
   },
+
+  // Mutations
   Mutation: {
+
+    // Adding a new user
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
 
       return { token, user };
     },
+
+    // Adding a new day
     addDay: async (parent, { climbs }, context) => {
       console.log(context);
       if (context.user) {
@@ -112,6 +92,8 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
+
+    // Updating an existing user
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, { new: true });
@@ -119,12 +101,25 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    // UPDATE DAY FUNCTION TO FIX
-    // updateDay: async (parent, { _id, quantity }) => {
-    //   const decrement = Math.abs(quantity) * -1;
 
-    //   return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
-    // },
+    // Updating an existing day
+    updateDay: async (parent, args, context, info) => {
+      const { id } = args;
+      const { user, dayDate, crag, climb, focus, attempts, rests, beta, notes } = args.day;
+      const day = await Day.findByIdAndUpdate(
+        id,
+        { user, dayDate, crag, climb, focus, attempts, rests, beta, notes },
+        { new: true }
+      );
+      return day;
+    },
+
+    // Deleting an existing day
+    deleteDay: async (parent, { _id }) => {
+      return await Day.deleteOne({ _id });
+    },
+
+    // Log in a returning user
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -142,11 +137,6 @@ const resolvers = {
 
       return { token, user };
     },
-
-    deleteDay: async (parent, { _id }) => {
-      return await Day.deleteOne({ _id });
-    },
-
   }
 };
 

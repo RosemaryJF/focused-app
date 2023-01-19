@@ -47,16 +47,6 @@ export const reducer = (state, action) => {
         )
       };
 
-
-    // case TOGGLE_THEME: {
-    //   return {
-    //     ...state,
-    //     darkTheme: newDarkTheme,
-    //   };
-    // }
-
-    // Return the state as is in the event that the `action.type` passed to our reducer was not accounted for by the developers
-    // This saves us from a crash.
     default:
       return state;
   }
@@ -65,11 +55,3 @@ export const reducer = (state, action) => {
 export function useDayReducer(initialState) {
   return useReducer(reducer, initialState);
 };
-
-// export const themeReducer = (state, { type }) => {
-
-// };
-
-// export function useThemeReducer(initialState) {
-//   return useReducer(themeReducer, initialState);
-// }

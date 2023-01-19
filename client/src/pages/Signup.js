@@ -15,6 +15,7 @@ function Signup(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [addUser] = useMutation(ADD_USER);
 
+  // Handles the signup form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const mutationResponse = await addUser({
@@ -29,6 +30,7 @@ function Signup(props) {
     Auth.login(token);
   };
 
+  // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -37,13 +39,13 @@ function Signup(props) {
     });
   };
 
+  // Sign up form
   return (
-
     <div className="justify-content-evenly text-center" id="signupForm">
       <img src={logo} alt="Focused Logo" style={{ width: '200px', height: '200px', marginBottom: '10px' }} />
       <h2>Signup</h2>
       <Form className="container-sm" onSubmit={handleFormSubmit}>
-        <Form.Group as={Row} className="mb-3" controlId='formSignupEmail'>
+        <Form.Group as={Row} className="mb-3" id='formSignupEmail'>
           <Form.Label column sm={2}>
             First Name:
           </Form.Label>

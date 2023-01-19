@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useQuery, useContext } from '@apollo/client';
+import React, { useEffect, useContext } from 'react';
+import { useQuery } from '@apollo/client';
 import { QUERY_ALL_CLIMBS, QUERY_CLIMBS } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 

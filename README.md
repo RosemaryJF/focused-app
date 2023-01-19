@@ -1,6 +1,110 @@
 # focused-app
 
- https://stark-taiga-90419.herokuapp.com/
+# FOCUSED
+
+![License: GNU GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
+
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![NodeJS](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![GraphQL](https://img.shields.io/badge/GraphQl-E10098?style=for-the-badge&logo=graphql&logoColor=white)
+![NPM](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white)
+
+
+
+## Description
+
+Focused is a climbing app for planning your outdoor days. Climbers sometimes feel left in the past with may of us still relying on pen to paper to take notes about our sessions; whether that be indoors or outdoors. Focused was created so that prior to heading outside next you can input a day, pick the climb and decided what your focus is gojng to be for it. The user can then retrospectively edit their day with notes about the climb for when they come back to it. 
+
+Focused allows the user to see their days coming up and be able to plan accordignly so they can spend more time on the wall!
+
+I overcame quite a lot of hurdles with React as this was my first application where I used it for my front end. Deploying a client and server side project to Heroku also allowed me to de-bug and learn some helpful tricks for next time. In addition learning the differences between React-Bootstrap and general Bootstrap was a good learning curve. 
+
+Focused is still very much a work in progress with lots of ideas to implement for future development so keep checking back!
+
+---
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Future Development](#future-development)
+- [License](#license)
+- [Credits](#credits)
+
+---
+
+## Installation
+
+The user will need to clone the application from my GitHub account: https://github.com/RosemaryJF/focused-app, to their local repository, and install Node.js, MongoDB, express and npm on their code editor, if it isn't already.
+
+Once cloned to the local repository the user will need to run `npm i` or `npm install` so that the necessary packages are installed on the application, in the correct levels.
+
+Next the user should open focused in their integrated terminal. They should run the following command:
+
+- `npm run seed`
+
+They will seed the database in the server folder. Once this has been done they can choose to test queries on Apollo by running:
+
+- `npm start`
+
+The terminal will present the user with a link to follow. 
+
+To run the program in development mode if they want to make code level changes that are reflected live the user should run the following in their terminal:
+
+- `npm run develop`
+
+This ensures the program will load changes in real time each time the user saves.
+
+---
+
+## Usage
+
+To use the application the user can navigate to the Heruko deployment link here:  https://stark-taiga-90419.herokuapp.com/
+
+From the homepage they will be asked to login or signup:
+
+![Focused homepage asking user to login or signup with logo](./server/assets/homepage.png)
+
+To get to the dashboard they will be prompted to log in:
+
+![Focused log in page](./server/assets/login.png)
+
+If they are new they can head to the sign up to create an account:
+
+![Focused sign up page](./server/assets/signup.png)
+
+Once this is done from the homepage the user now has the option to add a new blog, or delete a blog they have posted previously:
+
+![MVC Tech Blog homepage when logged in](public/images/homepage-loggedin.jpg)
+![MVC Tech Blog delete button](public/images/delete-button.jpg)
+
+Once this is done the dashboard will refresh and the user can now see the newly added blog post.
+
+The user also has the option to view an exisiting blog indivudually, from this page they can add a comment to an existing blog, or edit the blog they are viewing:
+
+![MVC Tech Blog individual blog page, option to edit it or add a comment](public/images/edit-blog.jpg)
+
+If the users page is idle for too long the application will log them out and they will prompted to sign in again to do anything other that view the homepage.
+
+---
+
+## Future Development
+
+The add a comment and edit a blog functionality is still not working correctly. It is currently not returning any errors and I have been unable to debug why. This will be solved for future development.
+
+---
+
+## License
+
+This application is licensed under an [MIT license](https://github.com/RosemaryJF/mvc-tech-blog/blob/main/LICENSE).
+
+---
+
+## Credits
+
 
 https://www.advnture.com/features/rock-climbing-terms
 https://github.com/nodejs/node-gyp#on-windows

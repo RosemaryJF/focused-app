@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { QUERY_DAYS } from '../../utils/queries';
 
@@ -23,25 +23,34 @@ const DayList = ({
       {days &&
         days.map((day) => (
           <Container key={day._id} className="mx-auto d-grid gap-4">
-            <Row className="text-center" bg="custom-color-800-lght">
-              <Col>Date: {day.dayDate}</Col>
-              <Col>Climb: {day.climbs}</Col>
-              <Col>Crag: {day.crags}</Col>
-            </Row>
-            <Row className="text-center">
-              <Col >Focus: {day.focus}</Col>
-            </Row>
-            <Row className="text-center">
-              <Col>Attempts: {day.attempts}</Col>
-              <Col>Rests: {day.rests}</Col>
-            </Row>
-            <Row className="text-center">
-              <Col>Beta: {day.beta}</Col>
-            </Row>
-            <Row>
-              <Col>Notes: {day.notes}</Col>
-            </Row>
+            <Card bg="custom-color-700-lght" style={{ width: '100%' }}>
+              <Row className="mx-auto text-center" bg="custom-color-700-lght">
+                <Col><strong>Date:</strong>{day.dayDate}</Col>
+                <Col><strong>Climb:</strong> {day.climbs}</Col>
+                <Col><strong>Crag:</strong> {day.crags}</Col>
+              </Row>
+              <br />
+              <Row className="text-center">
+                <Col ><strong>Focus:</strong> {day.focus}</Col>
+              </Row>
+              <br />
+              <Row className="text-center">
+                <Col><strong>Attempts:</strong> {day.attempts}</Col>
+                <Col><strong>Rests:</strong> {day.rests}</Col>
+              </Row>
+              <br />
+              <Row className="text-center">
+                <Col><strong>Beta:</strong> {day.beta}</Col>
+              </Row>
+              <br />
+              <Row>
+                <Col><strong>Notes:</strong> {day.notes}</Col>
+              </Row>
+              <br />
+            </Card>
+            <div></div>
           </Container>
+
         ))
       }
     </div >

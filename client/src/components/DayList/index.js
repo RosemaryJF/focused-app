@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client';
 import React, { Component } from 'react';
+import { Card } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { QUERY_DAYS } from '../../utils/queries';
 
@@ -22,11 +23,12 @@ const DayList = ({
       <h3>UPCOMING FOCUS DAYS</h3>
       {days &&
         days.map((day) => (
-          <div key={day._id} className="card mb-3">
+          <div key={day._id} className="">
             {/* <h4 className="card-header bg-primary text-light p-2 m-0">
               {day.dayDate}
             </h4> */}
-            <div className="card-body bg-light p-2">
+            <div className=" bg-transparent" bg="custom-color-800-lght">
+              <p>{day.dayDate}</p>
               <p>{day.climbs}</p>
               <p>{day.crags}</p>
               <p>{day.focus}</p>

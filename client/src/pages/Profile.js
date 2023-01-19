@@ -5,6 +5,7 @@ import Auth from '../utils/auth';
 
 import ClimbMenu from '../components/ClimbMenu';
 import Nav from '../components/Nav';
+import Footer from '../components/Footer';
 
 // Renders the users profile
 const Profile = () => {
@@ -21,8 +22,10 @@ const Profile = () => {
             <li>Click the '+' icon to add a day.</li>
             <li>Or view the days you've already created.</li>
           </p>
+          {/* Buggy, to fix in ongoing development */}
           {/* <ClimbMenu /> */}
         </div>
+        <Footer />
       </div >
     )
   };

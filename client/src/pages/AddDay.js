@@ -16,7 +16,7 @@ const AddDay = () => {
         <Nav />
         <Container className="px-5" style={{ marginTop: "50px", paddingTop: "50px", paddingBottom: "100px" }} >
           <Row className="text-justify">
-            <Col className="col-md-6 p-4 text-profile">
+            <Col className="col-md-6 p-4 profile">
               <DayForm />
             </Col>
           </Row>

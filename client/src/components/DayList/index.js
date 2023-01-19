@@ -1,7 +1,5 @@
 import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import { Link } from "react-router-dom";
-import { QUERY_DAYS } from '../../utils/queries';
 
 const DayList = ({
   days,
@@ -9,6 +7,7 @@ const DayList = ({
   showClimb = true,
   showFirstName = true,
 }) => {
+  // Buggy, to be fixed
   // if (!days.length) {
   //   return (
   //     <div>

@@ -18,7 +18,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Serves up static assets
-app.use('/images', express.static(path.join(__dirname, '../client/images')));
+app.use('/images', express.static(path.join(__dirname, '../client/assets/images')));
+
+app.use(express.static(__dirname + '/public'))
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
